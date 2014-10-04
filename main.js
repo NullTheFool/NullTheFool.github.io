@@ -24,8 +24,8 @@ function keyDownHandler(event)
 			hero.style = hero.randRGB();
 			break;
 		case "S":
-			hero.position.elements[0] = Math.floor((Math.random() * canvas.width) - hero.width);
-			hero.position.elements[1] = Math.floor((Math.random() * canvas.height) - hero.height);
+			hero.pos.els[0] = Math.floor((Math.random() * canvas.width) - hero.width);
+			hero.pos.els[1] = Math.floor((Math.random() * canvas.height) - hero.height);
 			break;
 		case "A":
 			hero.left = true;
@@ -115,13 +115,13 @@ function applyDraw(actor)
 	actor.draw = function()
 	{
 		ctx.fillStyle = actor.style;
-		ctx.fillRect(actor.position.elements[0], actor.position.elements[1], actor.width, actor.height);
+		ctx.fillRect(actor.pos.els[0], actor.pos.els[1], actor.width, actor.height);
 	};
 }
 
 function applyGravity(actor, gravity)
 {
-	actor.acceleration.add(gravity);
+	actor.acc.add(gravity);
 }
 
 //	Starting point for program

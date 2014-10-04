@@ -1,19 +1,22 @@
-function Vector(els)
+function Vector(elements)
 {
-	if(els === undefined)	//	Empty vector
+	this.els;
+	this.size;
+
+	if(elements === undefined)	//	Empty vector
 	{
-		this.elements = [];
+		this.els = [];
 		this.size = 0;
 	}
 	else
 	{
-		this.elements = els;
-		this.size = els.length;
+		this.els = elements;
+		this.size = elements.length;
 	}
 
 	this.print = function()
 	{
-		this.elements.forEach(function(entry)
+		this.els.forEach(function(entry)
 				{
 					console.log(entry);
 				});
@@ -30,9 +33,9 @@ function Vector(els)
 			var sum = new Vector();
 			for(var i = 0; i < this.size; i++)
 			{
-				sum.elements.push(this.elements[i] + vec.elements[i]);
+				sum.els.push(this.els[i] + vec.els[i]);
 			}
-			this.elements =  sum.elements;
+			this.els =  sum.els;
 		}
 	};
 
@@ -47,9 +50,9 @@ function Vector(els)
 			var difference = new Vector();
 			for(var i = 0; i < this.size; i++)
 			{
-				difference.elements.append(this.elements[i] - vec.elements[i]);
+				difference.els.push(this.els[i] - vec.els[i]);
 			}
-			this.elements = difference.elements;;
+			this.els = difference.els;;
 		}
 	};
 
@@ -57,7 +60,7 @@ function Vector(els)
 	{
 		for(var i = 0; i < this.size; i++)
 		{
-			this.elements[i] *= scalar;
+			this.els[i] *= scalar;
 		}
 	};
 }

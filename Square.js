@@ -11,17 +11,17 @@ function Square(x, y, width, height)
 	this.jump = false;
 
 	//	Position
-	this.position = new Vector([x,y]);
+	this.pos = new Vector([x,y]);
 	
 	//	Velocity
-	this.velocity = new Vector([0,0]);
+	this.vel = new Vector([0,0]);
 
 	//	Acceleration
-	this.acceleration = new Vector([0,0]);
+	this.acc = new Vector([0,0]);
 
 	this.onGround = function()
 	{
-		if(this.position.elements[1] + this.height >= canvas.height)
+		if(this.pos.els[1] + this.height >= canvas.height)
 		{
 			return true;
 		}
@@ -33,7 +33,7 @@ function Square(x, y, width, height)
 
 	this.onLeftWall = function()
 	{
-		if(this.position.elements[0] <= 0)
+		if(this.pos.els[0] <= 0)
 			return true;
 		else
 			return false;
@@ -41,7 +41,7 @@ function Square(x, y, width, height)
 
 	this.onRightWall = function()
 	{
-		if((this.position.elements[0] + this.width) >= canvas.width)
+		if((this.pos.els[0] + this.width) >= canvas.width)
 			return true;
 		else
 			return false;
@@ -51,33 +51,33 @@ function Square(x, y, width, height)
 	{
 		//	Directional booleans
 		if(this.jump)
-			this.velocity.elements[1] = -12;
+			this.vel.els[1] = -12;
 
 		if(this.left)
-			this.velocity.elements[0] = -4;
+			this.vel.els[0] = -4;
 		else if(this.right)
-			this.velocity.elements[0] = 4;
+			this.vel.els[0] = 4;
 		else if(!this.left || !this.right)
-			this.velocity.elements[0] = 0;
+			this.vel.els[0] = 0;
 
 		//	Apply velocity to position
-		this.position.add(this.velocity);
+		this.pos.add(this.vel);
 
 		//	Apply acceleration to velocity
-		this.velocity.add(this.acceleration);
+		this.vel.add(this.acc);
 
 		//	BOUNDS CHECKING
 		if(this.onRightWall())	//	RIGHT BOUND
 		{
-			this.position.elements[0] = canvas.width - this.width;
+			this.pos.els[0] = canvas.width - this.width;
 		}
 		else if(this.onLeftWall())	//	LEFT BOUND
 		{
-			this.position.elements[0] = 0;
+			this.pos.els[0] = 0;
 		}
 		if(this.onGround())	//	ON THE GROUND
 		{
-			this.position.elements[1] = canvas.height - this.height;
+			this.pos.els[1] = canvas.height - this.height;
 		}
 	};
 
