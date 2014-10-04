@@ -5,20 +5,17 @@ function Square(x, y, width, height)
 	this.height = height;
 
 	//	Position
-	this.x = x;
-	this.y = y;
-
+	this.position = new Vector([x,y]);
+	
 	//	Velocity
-	this.vx = 0;
-	this.vy = 0;
+	this.velocity = new Vector([0,0]);
 
 	//	Acceleration
-	this.ax = 0;
-	this.ay = 0;
+	this.acceleration = new Vector([0,0]);
 
 	this.onGround = function()
 	{
-		if(this.y + this.height >= canvas.height)
+		if(this.position.elements[1] + this.height >= canvas.height)
 			return true;
 		else
 			return false;
@@ -26,7 +23,7 @@ function Square(x, y, width, height)
 
 	this.onLeftWall = function()
 	{
-		if(this.x <= 0)
+		if(this.position.elements[0] <= 0)
 			return true;
 		else
 			return false;
@@ -34,7 +31,7 @@ function Square(x, y, width, height)
 
 	this.onRightWall = function()
 	{
-		if((this.x + this.width) >= canvas.width)
+		if((this.position.elements[0] + this.width) >= canvas.width)
 			return true;
 		else
 			return false;
@@ -43,25 +40,23 @@ function Square(x, y, width, height)
 	this.update = function()
 	{
 		//	Apply velocity to position
-		this.x += this.vx;
-		this.y += this.vy;
+		this.position.add(this.velocity);
 
 		//	Apply acceleration to velocity
-		this.vx += this.ax;
-		this.vy += this.ay;
+		this.velocity.add(this.acceleration);
 
 		//	BOUNDS CHECKING
 		if(this.onRightWall())	//	RIGHT BOUND
 		{
-			this.x = canvas.width - this.width;
+			this.position.elements[0] = canvas.width - this.width;
 		}
 		else if(this.onLeftWall())	//	LEFT BOUND
 		{
-			this.x = 0;
+			this.position.elements[0] = 0;
 		}
-		else if(this.onGround())	//	ON THE GROUND
+		if(this.onGround())	//	ON THE GROUND
 		{
-			this.y = canvas.height - this.height;
+			this.position.elements[1] = canvas.height - this.height;
 		}
 	};
 

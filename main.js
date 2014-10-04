@@ -1,7 +1,9 @@
 //	Objects
 var canvas,
 	ctx,
-	hero;
+	hero,
+	vec1,
+	vec2;
 
 //	Grid variables
 var TILE_S = 16,
@@ -9,7 +11,7 @@ var TILE_S = 16,
 	ROWS = 32;
 
 //	"World" variables
-var GRAVITY = 1;
+var GRAVITY = new Vector([0,1]);
 
 function keyDownHandler(event)
 {
@@ -18,15 +20,15 @@ function keyDownHandler(event)
 	switch(key)
 	{
 		case "W":
-			hero.vy = -12;
+			hero.velocity.elements[1] = -12;
 			break;
 		case "S":
 			break;
 		case "A":
-			hero.vx = -4;
+			hero.velocity.elements[0] = -4;
 			break;
 		case "D":
-			hero.vx = 4;
+			hero.velocity.elements[0] = 4;
 			break;
 	}
 }
@@ -42,10 +44,10 @@ function keyUpHandler(event)
 		case "S":
 			break;
 		case "A":
-			hero.vx = 0;
+			hero.velocity.elements[0] = 0;
 			break;
 		case "D":
-			hero.vx = 0;
+			hero.velocity.elements[0] = 0;
 			break;
 	}
 }
@@ -109,13 +111,13 @@ function applyDraw(actor)
 	actor.draw = function()
 	{
 		ctx.fillStyle = "white";
-		ctx.fillRect(actor.x, actor.y, actor.width, actor.height);
+		ctx.fillRect(actor.position.elements[0], actor.position.elements[1], actor.width, actor.height);
 	};
 }
 
-function applyGravity(actor, grav)
+function applyGravity(actor, gravity)
 {
-	actor.ay += grav;
+	actor.acceleration.add(gravity);
 }
 
 //	Starting point for program
