@@ -6,9 +6,9 @@ var canvas,
 	vec2;
 
 //	Grid variables
-var TILE_S = 16,
+var TILE_S = 32,
 	COLS = 32,
-	ROWS = 32;
+	ROWS = 16;
 
 //	"World" variables
 var GRAVITY = new Vector([0,1]);
@@ -20,15 +20,18 @@ function keyDownHandler(event)
 	switch(key)
 	{
 		case "W":
-			hero.velocity.elements[1] = -12;
+			hero.jump = true;
+			hero.style = hero.randRGB();
 			break;
 		case "S":
+			hero.position.elements[0] = Math.floor((Math.random() * canvas.width) - hero.width);
+			hero.position.elements[1] = Math.floor((Math.random() * canvas.height) - hero.height);
 			break;
 		case "A":
-			hero.velocity.elements[0] = -4;
+			hero.left = true;
 			break;
 		case "D":
-			hero.velocity.elements[0] = 4;
+			hero.right = true;
 			break;
 	}
 }
@@ -40,14 +43,15 @@ function keyUpHandler(event)
 	switch(key)
 	{
 		case "W":
+			hero.jump = false;
 			break;
 		case "S":
 			break;
 		case "A":
-			hero.velocity.elements[0] = 0;
+			hero.left = false; 
 			break;
 		case "D":
-			hero.velocity.elements[0] = 0;
+			hero.right = false;
 			break;
 	}
 }
@@ -110,7 +114,7 @@ function applyDraw(actor)
 {
 	actor.draw = function()
 	{
-		ctx.fillStyle = "white";
+		ctx.fillStyle = actor.style;
 		ctx.fillRect(actor.position.elements[0], actor.position.elements[1], actor.width, actor.height);
 	};
 }
