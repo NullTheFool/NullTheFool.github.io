@@ -6,7 +6,7 @@
 	}
 
 	//	Universal Constants
-	Universe.prototype.G = 3;
+	Universe.prototype.G = 0.005;
 	
 	//	Universe Entities
 	Universe.prototype.entities = [];
@@ -17,7 +17,8 @@
 		{
 			for(var j = 0; j < this.entities.length; j++)
 			{
-				this.entities[i].fNet = this.entities[i].fNet.add(this.vecGravity(this.entities[i],this.entities[j]));
+				var fG = this.vecGravity(this.entities[i],this.entities[j]);
+				this.entities[i].fNet = this.entities[i].fNet.add(fG);
 			}
 		}
 
@@ -40,28 +41,16 @@
 
 	Universe.prototype.vecGravity = function(e1, e2)
 	{
-		var vecDisp = this.vecDisplacement(e1, e2);
+		var fMag;
+		var fDir = this.vecDisplacement(e1,e2).normalize();
+		var r = this.vecDisplacement(e1,e2).mag();
 
-		var dx = vecDisp.e(0);
-		var dy = vecDisp.e(1);
-
-		var fx;
-		var fy;
-
-		//	Prevent division by zero, this was not caught by me for a while FML
-		if(dx !== 0)
-			fx = (this.G * e1.mass * e2.mass) / (dx * dx);
+		if(r === 0)
+			fMag = 0;
 		else
-			fx = 0;
+			fMag = ((this.G * e1.mass * e2.mass)/(r*r));
 
-		//	Prevent division by zero, this was not caught by me for a while FML
-		if(dy !== 0)
-			fy = (this.G * e1.mass * e2.mass) / (dy * dy);
-		else
-			fy = 0;
-
-
-		return new Vector([fx, fy]);
+		return fDir.scale(fMag);
 	};
 
 	Universe.prototype.vecDisplacement = function(e1, e2)

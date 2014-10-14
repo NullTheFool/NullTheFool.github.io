@@ -26,8 +26,8 @@ function init()
 	univ = new Universe();
 
 	//	Initialize objects here
-	univ.entities.push(new Entity(16, 16, 32, 32, 5));
-	univ.entities.push(new Entity(128, 16, 32, 32, 2));
+	univ.entities.push(new Entity(16, 16, 32, 32, 5, "#FFffFF"));
+	univ.entities.push(new Entity(128, 16, 32, 32, 2, "#55ff55"));
 }
 
 //	Main game loop

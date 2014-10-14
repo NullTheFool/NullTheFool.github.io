@@ -1,13 +1,13 @@
 (function(Vector) 
 {
 	//	Constructor Function
-	function Entity(x, y, width, height, mass)
+	function Entity(x, y, width, height, mass, style)
 	{
 		//	Size variables
 		this.width = width;
 		this.height = height;
 		this.mass = mass;
-		this.style = "#FFffFF";
+		this.style = style;
 		
 		//	Position
 		this.pos = new Vector([x,y]);
@@ -22,6 +22,10 @@
 		this.fNet = new Vector([0,0]);
 	}
 
+	Entity.prototype.setStyle = function(style)
+	{
+		this.style = style;
+	};
 
 	Entity.prototype.draw = function()
 	{

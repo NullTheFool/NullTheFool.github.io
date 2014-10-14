@@ -20,14 +20,37 @@
 		return this.elements[index];
 	};
 
+	Vector.prototype.mag = function()
+	{
+		var squareSum = 0;
+		for(var i = 0; i < this.elements.length; i++)
+		{
+			squareSum += this.elements[i] * this.elements[i];
+		}
+		return Math.sqrt(squareSum);
+	};
+
+	Vector.prototype.normalize = function()
+	{
+		if(this.mag() !== 0 )
+		{
+			return this.scale(1/this.mag());
+		}
+		else
+		{
+			return this.scale(0);
+		}
+	};
+
 	Vector.prototype.toString = function() 
 	{
-		var str = "[ ";
-		this.elements.forEach(function(entry)
+		var str = "[";
+		for(var i = 0;i < this.elements.length; i++)
 		{
-			str += entry;
-			str += " ";
-		});
+			str += this.elements[i];
+			if(i+1 < this.elements.length)
+				str += ", ";
+		}
 		str += "]";
 		return str;
 	};
@@ -70,7 +93,7 @@
 	Vector.prototype.scale = function(scalar)
 	{
 		var scaledVec = new Vector();
-		for(var i = 0; i < this.size; i++)
+		for(var i = 0; i < this.elements.length; i++)
 		{
 			scaledVec.elements.push(scalar * this.elements[i]);
 		}
