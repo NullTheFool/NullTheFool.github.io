@@ -2,33 +2,4 @@ canvas
 {
 	border-width:	2px;
 	border-style:	solid;
-	margin-left:	auto;
-	margin-right:	auto;
-	display:	block;
-}
-
-#top
-{
-	margin-left:	auto;
-	margin-right:	auto;
-	display:	block;
-}
-#left
-{
-	border-width:	2px;
-	border-style:	solid;
-	float:	left;
-}
-#right
-{
-	border-width:	2px;
-	border-style:	solid;
-	float:	right;
-}
-
-#panel
-{
-	margin-left:	auto;
-	margin-right:	auto;
-	display:	block;
 }
