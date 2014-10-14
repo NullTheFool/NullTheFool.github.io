@@ -26,7 +26,7 @@
 		//	Updates all entities starting with F=ma
 		for(var k = 0; k < this.entities.length; k++)
 		{
-			this.entities[k].acc = this.entities[k].acc.add(this.entities[k].fNet);
+			this.entities[k].acc = this.entities[k].acc.add( this.entities[k].fNet.scale(1/this.entities[k].mass) );
 			this.entities[k].vel = this.entities[k].vel.add(this.entities[k].acc);
 			this.entities[k].pos = this.entities[k].pos.add(this.entities[k].vel);
 		}
