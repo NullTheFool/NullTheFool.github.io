@@ -3,6 +3,10 @@ var canvas,
 	ctx,
 	univ;
 
+//	Entity variables for testing
+	var e1,
+		e2;
+
 //	Grid variables
 var TILE_S = 32,
 	COLS = 32,
@@ -25,9 +29,12 @@ function init()
 	//	Universe object initialized
 	univ = new Universe();
 
+	e1 = new Entity(512, 128, 16, 16, 5, "#FFffFF");
+	e2 = new Entity(720, 128, 16, 16, 2, "#55aaFF");
+
 	//	Initialize objects here
-	univ.entities.push(new Entity(16, 16, 32, 32, 5, "#FFffFF"));
-	univ.entities.push(new Entity(128, 16, 32, 32, 2, "#55ff55"));
+	univ.entities.push(e1);
+	univ.entities.push(e2);
 }
 
 //	Main game loop

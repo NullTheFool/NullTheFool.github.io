@@ -6,13 +6,14 @@
 	}
 
 	//	Universal Constants
-	Universe.prototype.G = 0.005;
+	Universe.prototype.G = 0.5;
 	
 	//	Universe Entities
 	Universe.prototype.entities = [];
 
 	Universe.prototype.update = function()
 	{
+		//	Calculates the netForce on an entity
 		for(var i = 0; i < this.entities.length; i++)
 		{
 			for(var j = 0; j < this.entities.length; j++)
@@ -22,13 +23,19 @@
 			}
 		}
 
+		//	Updates all entities starting with F=ma
 		for(var k = 0; k < this.entities.length; k++)
 		{
 			this.entities[k].acc = this.entities[k].acc.add(this.entities[k].fNet);
 			this.entities[k].vel = this.entities[k].vel.add(this.entities[k].acc);
 			this.entities[k].pos = this.entities[k].pos.add(this.entities[k].vel);
 		}
-				
+
+		//	SUPER IMPORTANT TO RESET THE FNET FOR NEXT TIME STEP
+		for(var l = 0; l < this.entities.length; l++)
+		{
+			this.entities[l].fNet = this.entities[l].fNet.scale(0);
+		}
 	};
 
 	Universe.prototype.draw = function()
