@@ -3,6 +3,11 @@ var canvas,
 	ctx,
 	univ;
 
+//	Time step variables
+var now,
+	deltaStep;
+var then = Date.now();
+
 //	Entity variables for testing
 	var e1,
 		e2;
@@ -30,25 +35,36 @@ function init()
 	univ = new Universe();
 
 	e1 = new Entity(512, 128, 16, 16, 5, "#FFffFF");
-	e2 = new Entity(720, 128, 16, 16, 2, "#55aaFF");
+	e1.vel = e1.vel.add(new Vector([0, -0.01]));
+	e2 = new Entity(720, 128, 16, 16, 5, "#55aaFF");
+	e2.vel = e2.vel.add(new Vector([0, 0.09]));
 
 	//	Initialize objects here
 	univ.entities.push(e1);
 	univ.entities.push(e2);
 }
 
+function delta()
+{
+	now = Date.now();
+	deltaStep = now - then;
+	then = now;
+
+	return deltaStep;
+}
+
 //	Main game loop
 function loop()
 {
-	updateAll();
+	updateAll(delta());
 	drawAll();
 	window.requestAnimationFrame(loop);
 }
 
 //	Update the univ object
-function updateAll()
+function updateAll(delta)
 {
-	univ.update();
+	univ.update(delta);
 }
 
 //	Draws background and universe
