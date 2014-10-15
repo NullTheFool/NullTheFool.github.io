@@ -1,11 +1,10 @@
 (function(Vector) 
 {
 	//	Constructor Function
-	function Entity(x, y, width, height, mass, style)
+	function Entity(x, y, radius,  mass, style)
 	{
 		//	Size variables
-		this.width = width;
-		this.height = height;
+		this.radius = radius;
 		this.mass = mass;
 		this.style = style;
 		
@@ -29,8 +28,10 @@
 
 	Entity.prototype.draw = function()
 	{
+		window.ctx.beginPath();
+		window.ctx.arc(this.pos.e(0), this.pos.e(1), this.radius, 0, Math.PI * 2, false);
 		window.ctx.fillStyle = this.style;
-		window.ctx.fillRect(this.pos.e(0), this.pos.e(1), this.width, this.height);
+		window.ctx.fill();
 	};
 
 	window.Entity = Entity;
