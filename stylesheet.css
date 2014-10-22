@@ -8,13 +8,11 @@ section, nav
 {
 	background:		#000000;
 
-	margin:			4px;
+	margin:			4px auto;
 	padding:		4px;
 	
 	width:			50%;
 
-	position:		relative;
-	left:			25%;
 
 }
 
