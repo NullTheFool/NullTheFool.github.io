@@ -3,24 +3,25 @@
     <head>
 	<title>NullTheFool</title>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="stylesheet.css">
+	<script src="scripts/ajax.js"></script>
+	<link rel="stylesheet" href="stylesheets/imports.css">
     </head>
 
-    <body>
-	<header>
-	    <h1 class="page_title">NullTheFool</h1>
-	    <nav>
-		<a class="nav_link" href="https://nullthefool.github.io">HOME</a>
+    <body class="rows">
+	<header class="row">
+	    <h1 class="bubble row title">NullTheFool</h2>
+
+	    <nav class="bubble row centered columns">
+		<a href="javascript:replace('info', 'pages/home.html');">Home</a>
+		<a href="javascript:replace('info', 'pages/projects.html');">Projects</a>
+		<a href="javascript:replace('info', 'pages/blog.html');">Blog</a>
+		<a href="javascript:replace('info', 'pages/resume.html');">Resume</a>
+		<a href="javascript:replace('info', 'pages/about.html');">About</a>
 	    </nav>
 	</header>
 
-	<section>
-	    <h1>Projects</h1>
-	    <ul>
-		<li>
-		    <a href="https://nullthefool.github.io/gravity">Universal Gravitation Simulation</a>
-		</li>
-	    </ul>
+	<section id="info" class="row">
+	    <p>testing</p>
 	</section>
     </body>
 </html>
